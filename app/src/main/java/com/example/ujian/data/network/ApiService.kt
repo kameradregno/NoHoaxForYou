@@ -7,6 +7,13 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @GET("/merdeka/teknologi")
+    fun getMerdekaTechNews(
+        @Query("q") q: String = "teknologi",
+        @Query("language") language: String = "id",
+        @Query("pageSize") pageSize: Int = 10,
+        @Query("sortBy") sortBy: String = "popularity"
+    ) : Call<NewsResponse>
     @GET("/merdeka/otomotif")
     fun getMerdekaAutoNews(
         @Query("q") q: String = "otomotif",
