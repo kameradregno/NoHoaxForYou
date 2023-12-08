@@ -5,22 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ujian.R
+import com.example.ujian.adapter.NewsAdapter
+import com.example.ujian.data.repository.NewsRepository
 import com.example.ujian.databinding.FragmentMerdekaAutoBinding
+import com.example.ujian.ui.NewsViewModel
+import com.example.ujian.utils.NewsViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MerdekaAutoFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MerdekaAutoFragment : Fragment() {
 
     lateinit var binding: FragmentMerdekaAutoBinding
+    private val merdekaViewModel: NewsViewModel by viewModels {
+        NewsViewModelFactory(NewsRepository())
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,23 +30,33 @@ class MerdekaAutoFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MerdekaAutoFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MerdekaAutoFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val mAdapter = NewsAdapter()
+        merdekaViewModel.getMerdekaAutoNews()
+
+        merdekaViewModel.merdekaAutoNews.observe(viewLifecycleOwner) { dataNews ->
+            dataNews?.data?.let { mAdapter.setData(it.posts) }
+        }
+
+        binding.rvMerdekaAuto.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        merdekaViewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
     }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.loadingView.root.visibility = View.VISIBLE
+        } else {
+            binding.loadingView.root.visibility = View.GONE
+        }
+    }
+
+
 }

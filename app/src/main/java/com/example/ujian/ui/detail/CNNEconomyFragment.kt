@@ -5,29 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ujian.R
 import com.example.ujian.adapter.NewsAdapter
 import com.example.ujian.data.repository.NewsRepository
-import com.example.ujian.databinding.FragmentMerdekaTechBinding
+import com.example.ujian.databinding.FragmentCNNEconomyBinding
 import com.example.ujian.ui.NewsViewModel
+import androidx.fragment.app.viewModels
 import com.example.ujian.utils.NewsViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class CNNEconomyFragment : Fragment() {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MerdekaTechFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MerdekaTechFragment : Fragment() {
-
-    lateinit var binding: FragmentMerdekaTechBinding
-    private val merdekaViewModel: NewsViewModel by viewModels {
+    lateinit var binding: FragmentCNNEconomyBinding
+    private val cnnViewModel: NewsViewModel by viewModels {
         NewsViewModelFactory(NewsRepository())
     }
 
@@ -35,7 +24,7 @@ class MerdekaTechFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMerdekaTechBinding.inflate(inflater, container, false)
+        binding = FragmentCNNEconomyBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,18 +32,18 @@ class MerdekaTechFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mAdapter = NewsAdapter()
-        merdekaViewModel.getMerdekaTechNews()
+        cnnViewModel.getCNNEconomyNews()
 
-        merdekaViewModel.merdekaTechNews.observe(viewLifecycleOwner) { dataNews ->
+        cnnViewModel.cnnEconomyNews.observe(viewLifecycleOwner) { dataNews ->
             dataNews?.data?.let { mAdapter.setData(it.posts) }
         }
 
-        binding.rvMerdekaTech.apply {
+        binding.rvCnnEconomy.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        merdekaViewModel.isLoading.observe(viewLifecycleOwner){
+        cnnViewModel.isLoading.observe(viewLifecycleOwner){
             showLoading(it)
         }
     }

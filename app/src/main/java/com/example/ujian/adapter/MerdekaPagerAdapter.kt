@@ -3,7 +3,7 @@ package com.example.ujian.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.ujian.ui.detail.MerdekaAutoFragment
-import com.example.ujian.ui.detail.MerdekaHistoryFragment
+import com.example.ujian.ui.detail.MerdekaWorldFragment
 import com.example.ujian.ui.detail.MerdekaTechFragment
 import com.example.ujian.ui.home.MerdekaFragment
 
@@ -14,7 +14,7 @@ class MerdekaPagerAdapter(fa: MerdekaFragment) : FragmentStateAdapter(fa) {
         return when (position) {
             0 -> MerdekaTechFragment()
             1 -> MerdekaAutoFragment()
-            2 -> MerdekaHistoryFragment()
+            2 -> MerdekaWorldFragment()
             else -> MerdekaTechFragment()
         }
     }

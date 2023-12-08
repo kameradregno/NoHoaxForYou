@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.ujian.R
 import com.example.ujian.adapter.MerdekaPagerAdapter
 import com.example.ujian.adapter.TempoPagerAdapter
 import com.example.ujian.databinding.FragmentTempoBinding
@@ -15,9 +14,16 @@ class TempoFragment : Fragment() {
 
     private lateinit var binding: FragmentTempoBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentTempoBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupViewPager()
     }
 
@@ -26,18 +32,18 @@ class TempoFragment : Fragment() {
         val tabList = arrayOf(
             "Teknologi",
             "Otomotif",
-            "Sejarah",
+            "Sejarah"
         )
-        TabLayoutMediator(binding.tabTempo, binding.vpTempo) {tab, page ->
-            tab.text = tabList[page]
-        }.attach()
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTempoBinding.inflate(inflater, container, false)
-        return binding.vpTempo
+        val adapter = TempoPagerAdapter(this)
+        binding.vpTempo.adapter = adapter
+
+        TabLayoutMediator(binding.tabTempo, binding.vpTempo) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Teknologi"
+                1 -> tab.text = "Otomotif"
+                2 -> tab.text = "Metro"
+            }
+        }.attach()
     }
 }

@@ -7,10 +7,18 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_merdeka_auto"
+        android:id="@+id/rv_merdeka_tech"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        tools:listitem="@layout/item_row_news"
         android:background="@color/white"
         android:paddingTop="8dp" />
+
+    <include
+        android:id="@+id/loading_view"
+        layout="@layout/loading_indicator"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </FrameLayout>

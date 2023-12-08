@@ -14,19 +14,18 @@ interface ApiService {
         @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
+
     @GET("/merdeka/otomotif")
     fun getMerdekaAutoNews(
         @Query("q") q: String = "otomotif",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
-    @GET("/merdeka/sejarah")
-    fun getMerdekaHistoryNews(
+    @GET("/merdeka/dunia")
+    fun getMerdekaWorldNews(
         @Query("q") q: String = "sejarah",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
@@ -34,7 +33,6 @@ interface ApiService {
     fun getTempoTechNews(
         @Query("q") q: String = "tekno",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
@@ -42,15 +40,13 @@ interface ApiService {
     fun getTempoAutoNews(
         @Query("q") q: String = "otomotif",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
-    @GET("/tempo/sejarah")
-    fun getTempoHistoryNews(
+    @GET("/tempo/metro")
+    fun getTempoMetroNews(
         @Query("q") q: String = "otomotif",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
@@ -58,7 +54,6 @@ interface ApiService {
     fun getCNNTechNews(
         @Query("q") q: String = "teknologi",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
@@ -66,15 +61,13 @@ interface ApiService {
     fun getCNNEntertainmentNews(
         @Query("q") q: String = "hiburan",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 
-    @GET("/cnn/sejarah")
-    fun getCNNHistoryNews(
+    @GET("/cnn/ekonomi")
+    fun getCNNEconomyNews(
         @Query("q") q: String = "sejarah",
         @Query("language") language: String = "id",
-        @Query("pageSize") pageSize: Int = 10,
         @Query("sortBy") sortBy: String = "popularity"
     ) : Call<NewsResponse>
 

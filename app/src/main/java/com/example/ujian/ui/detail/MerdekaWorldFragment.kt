@@ -7,26 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ujian.R
 import com.example.ujian.adapter.NewsAdapter
 import com.example.ujian.data.repository.NewsRepository
-import com.example.ujian.databinding.FragmentMerdekaTechBinding
+import com.example.ujian.databinding.FragmentMerdekaWorldBinding
 import com.example.ujian.ui.NewsViewModel
 import com.example.ujian.utils.NewsViewModelFactory
+class MerdekaWorldFragment : Fragment() {
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MerdekaTechFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class MerdekaTechFragment : Fragment() {
-
-    lateinit var binding: FragmentMerdekaTechBinding
+    lateinit var binding: FragmentMerdekaWorldBinding
     private val merdekaViewModel: NewsViewModel by viewModels {
         NewsViewModelFactory(NewsRepository())
     }
@@ -35,7 +23,7 @@ class MerdekaTechFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMerdekaTechBinding.inflate(inflater, container, false)
+        binding = FragmentMerdekaWorldBinding.inflate(inflater, container,false)
         return binding.root
     }
 
@@ -43,13 +31,13 @@ class MerdekaTechFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val mAdapter = NewsAdapter()
-        merdekaViewModel.getMerdekaTechNews()
+        merdekaViewModel.getMerdekaWorldNews()
 
-        merdekaViewModel.merdekaTechNews.observe(viewLifecycleOwner) { dataNews ->
+        merdekaViewModel.merdekaWorldNews.observe(viewLifecycleOwner) { dataNews ->
             dataNews?.data?.let { mAdapter.setData(it.posts) }
         }
 
-        binding.rvMerdekaTech.apply {
+        binding.rvMerdekaWorld.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }

@@ -17,8 +17,8 @@ class NewsRepository {
     private val _merdekaAutoNews = MutableLiveData<NewsResponse>()
     val merdekaAutoNews: LiveData<NewsResponse> = _merdekaAutoNews
 
-    private val _merdekaHistoryNews = MutableLiveData<NewsResponse>()
-    val merdekaHistoryNews: LiveData<NewsResponse> = _merdekaHistoryNews
+    private val _merdekaWorldNews = MutableLiveData<NewsResponse>()
+    val merdekaWorldNews: LiveData<NewsResponse> = _merdekaWorldNews
 
     private val _tempoTechNews = MutableLiveData<NewsResponse>()
     val tempoTechNews: LiveData<NewsResponse> = _tempoTechNews
@@ -26,8 +26,8 @@ class NewsRepository {
     private val _tempoAutoNews = MutableLiveData<NewsResponse>()
     val tempoAutoNews: LiveData<NewsResponse> = _tempoAutoNews
 
-    private val _tempoHistoryNews = MutableLiveData<NewsResponse>()
-    val tempoHistoryNews: LiveData<NewsResponse> = _tempoHistoryNews
+    private val _tempoMetroNews = MutableLiveData<NewsResponse>()
+    val tempoMetroNews: LiveData<NewsResponse> = _tempoMetroNews
 
     private val _cnnTechNews = MutableLiveData<NewsResponse>()
     val cnnTechNews: LiveData<NewsResponse> = _cnnTechNews
@@ -35,31 +35,32 @@ class NewsRepository {
     private val _cnnEntertainmentNews = MutableLiveData<NewsResponse>()
     val cnnEntertainmentNews: LiveData<NewsResponse> = _cnnEntertainmentNews
 
-    private val _cnnHistoryNews = MutableLiveData<NewsResponse>()
-    val cnnHistoryNews: LiveData<NewsResponse> = _cnnHistoryNews
+    private val _cnnEconomyNews = MutableLiveData<NewsResponse>()
+    val cnnEconomyNews: LiveData<NewsResponse> = _cnnEconomyNews
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun getMerdekaTechNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getMerdekaTechNews()
+        ApiClient.getAllService.getMerdekaTechNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
                     response: Response<NewsResponse>
                 ) {
-                    _isLoading.value = false
                     if (response.isSuccessful) {
+                        _isLoading.value = false
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _merdekaTechNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -70,10 +71,9 @@ class NewsRepository {
 
             })
     }
-
     fun getMerdekaAutoNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getMerdekaAutoNews()
+        ApiClient.getAllService.getMerdekaAutoNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -84,12 +84,13 @@ class NewsRepository {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _merdekaAutoNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -100,10 +101,9 @@ class NewsRepository {
 
             })
     }
-
-    fun getMerdekaHistoryNews(){
+    fun getMerdekaWorldNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getMerdekaHistoryNews()
+        ApiClient.getAllService.getMerdekaWorldNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -113,13 +113,14 @@ class NewsRepository {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            _merdekaHistoryNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
+                            _merdekaWorldNews.postValue(response.body())
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -133,7 +134,7 @@ class NewsRepository {
 
     fun getTempoTechNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getTempoTechNews()
+        ApiClient.getAllService.getTempoTechNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -144,12 +145,13 @@ class NewsRepository {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _tempoTechNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -160,10 +162,9 @@ class NewsRepository {
 
             })
     }
-
     fun getTempoAutoNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getTempoAutoNews()
+        ApiClient.getAllService.getTempoAutoNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -174,12 +175,13 @@ class NewsRepository {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _tempoAutoNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -190,10 +192,9 @@ class NewsRepository {
 
             })
     }
-
-    fun getTempoHistoryNews(){
+    fun getTempoMetroNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getTempoHistoryNews()
+        ApiClient.getAllService.getTempoMetroNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -203,13 +204,14 @@ class NewsRepository {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            _tempoHistoryNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
+                            _tempoMetroNews.postValue(response.body())
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -223,7 +225,7 @@ class NewsRepository {
 
     fun getCNNTechNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getCNNTechNews()
+        ApiClient.getAllService.getCNNTechNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -234,12 +236,13 @@ class NewsRepository {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _cnnTechNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -250,10 +253,9 @@ class NewsRepository {
 
             })
     }
-
     fun getCNNEntertainmentNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getCNNEntertainmentNews()
+        ApiClient.getAllService.getCNNEntertainmentNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -264,12 +266,13 @@ class NewsRepository {
                         val responseBody = response.body()
                         if (responseBody != null) {
                             _cnnEntertainmentNews.postValue(response.body())
-                        } else {
-                            Log.e("Repository",
-                                "onResponse: Call error with HTTP status code" + response.code()
-                            )
                         }
+                    } else {
+                        Log.e("Repository",
+                            "onResponse: Call error with HTTP status code" + response.code()
+                        )
                     }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -280,10 +283,9 @@ class NewsRepository {
 
             })
     }
-
-    fun getCNNHistoryNews(){
+    fun getCNNEconomyNews(){
         _isLoading.value = true
-        ApiClient.provideApiService().getCNNHistoryNews()
+        ApiClient.getAllService.getCNNEconomyNews()
             .enqueue(object : Callback<NewsResponse> {
                 override fun onResponse(
                     call: Call<NewsResponse>,
@@ -293,13 +295,14 @@ class NewsRepository {
                     if (response.isSuccessful) {
                         val responseBody = response.body()
                         if (responseBody != null) {
-                            _cnnHistoryNews.postValue(response.body())
+                            _cnnEconomyNews.postValue(response.body())
+                        }
                         } else {
                             Log.e("Repository",
                                 "onResponse: Call error with HTTP status code" + response.code()
                             )
                         }
-                    }
+
                 }
 
                 override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
@@ -310,4 +313,6 @@ class NewsRepository {
 
             })
     }
+
+
 }

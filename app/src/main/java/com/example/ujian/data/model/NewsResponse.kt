@@ -1,50 +1,60 @@
 package com.example.ujian.data.model
 
 import kotlinx.parcelize.Parcelize
+import com.squareup.moshi.JsonClass
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class NewsResponse(
 
-	@field:SerializedName("paths")
-	val paths: List<PathsItem?>? = null,
+	@Json(name="data")
+	val data: Data? = null,
 
-	@field:SerializedName("name")
-	val name: String? = null
+	@Json(name="success")
+	val success: Boolean? = null,
+
+	@Json(name="message")
+	val message: String? = null,
 ) : Parcelable
 
+@JsonClass(generateAdapter = true)
+@Parcelize
+data class ArticlesItem(
+
+	@Json(name="thumbnail")
+	val thumbnail: String? = null,
+
+	@Json(name="link")
+	val link: String? = null,
+
+	@Json(name="description")
+	val description: String? = null,
+
+	@Json(name="title")
+	val title: String? = null,
+
+	@Json(name="pubDate")
+	val pubDate: String? = null
+) : Parcelable
+
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class Data(
 
-	@field:SerializedName("image")
+	@Json(name="image")
 	val image: String? = null,
 
-	@field:SerializedName("link")
+	@Json(name="link")
 	val link: String? = null,
 
-	@field:SerializedName("description")
+	@Json(name="description")
 	val description: String? = null,
 
-	@field:SerializedName("title")
-	val title: String? = null
-) : Parcelable
+	@Json(name="title")
+	val title: String? = null,
 
-@Parcelize
-data class PathsItem(
-
-	@field:SerializedName("data")
-	val data: Data? = null,
-
-	@field:SerializedName("success")
-	val success: Boolean? = null,
-
-	@field:SerializedName("message")
-	val message: String? = null,
-
-	@field:SerializedName("path")
-	val path: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null
+	@Json(name="posts")
+	val posts: List<ArticlesItem>,
 ) : Parcelable

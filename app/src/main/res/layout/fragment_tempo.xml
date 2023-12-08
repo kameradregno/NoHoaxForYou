@@ -10,16 +10,22 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_tempo"
         android:layout_width="match_parent"
+        android:background="@color/white"
+        app:tabTextColor="@color/black"
+        app:tabRippleColor="@color/darkred"
+        app:tabSelectedTextColor="@color/darkred"
+        app:tabIndicatorColor="@color/darkred"
         android:layout_height="70dp"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_tempo"
         android:layout_width="match_parent"
-        android:layout_height="815dp"
+        android:layout_height="match_parent"
         android:layout_marginTop="72dp"
         android:background="@color/white"
         android:paddingTop="8dp">
     </androidx.viewpager2.widget.ViewPager2>
+
 
 
 </FrameLayout>

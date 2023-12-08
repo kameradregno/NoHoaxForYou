@@ -2,9 +2,11 @@ package com.example.ujian
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import androidx.core.view.size
+import com.example.ujian.adapter.MainPagerAdapter
 import com.example.ujian.databinding.ActivityMainBinding
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,11 +17,60 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.tabMain.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                // Set icon untuk tab yang dipilih
+                tab.icon = when (tab.position) {
+                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    1 -> resources.getDrawable(R.drawable.logo_tempo)
+                    2 -> resources.getDrawable(R.drawable.logo_cnn)
+                    else -> null
+                }
+            }
 
-        binding.bottomNavView.setupWithNavController(
-            (supportFragmentManager
-                .findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-                .navController
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                // Set icon untuk tab yang tidak dipilih
+                tab.icon = when (tab.position) {
+                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    1 -> resources.getDrawable(R.drawable.logo_tempo)
+                    2 -> resources.getDrawable(R.drawable.logo_cnn)
+                    else -> null
+                }
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                tab?.icon = when (tab?.position) {
+                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    1 -> resources.getDrawable(R.drawable.logo_tempo)
+                    2 -> resources.getDrawable(R.drawable.logo_cnn)
+                    else -> null
+                }
+            }
+        })
+
+//        binding.tabMain.setTabIconSize(50)
+
+        setupVP()
+    }
+
+    private fun setupVP() {
+        binding.vpMain.adapter = MainPagerAdapter(this)
+        val tabList = arrayOf(
+            "Merdeka",
+            "Tempo",
+            "CNN"
         )
+
+        val adapter = MainPagerAdapter(this)
+        binding.vpMain.adapter = adapter
+
+        TabLayoutMediator(binding.tabMain, binding.vpMain) { tab, position ->
+            when (position) {
+                0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                1 -> resources.getDrawable(R.drawable.logo_tempo)
+                2 -> resources.getDrawable(R.drawable.logo_cnn)
+                else -> null
+            }
+        }.attach()
     }
 }
