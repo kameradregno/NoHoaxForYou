@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 // Set icon untuk tab yang dipilih
                 tab.icon = when (tab.position) {
-                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    0 -> resources.getDrawable(R.drawable.logo_antara)
                     1 -> resources.getDrawable(R.drawable.logo_tempo)
                     2 -> resources.getDrawable(R.drawable.logo_cnn)
                     else -> null
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 // Set icon untuk tab yang tidak dipilih
                 tab.icon = when (tab.position) {
-                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    0 -> resources.getDrawable(R.drawable.logo_antara)
                     1 -> resources.getDrawable(R.drawable.logo_tempo)
                     2 -> resources.getDrawable(R.drawable.logo_cnn)
                     else -> null
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 tab?.icon = when (tab?.position) {
-                    0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                    0 -> resources.getDrawable(R.drawable.logo_antara)
                     1 -> resources.getDrawable(R.drawable.logo_tempo)
                     2 -> resources.getDrawable(R.drawable.logo_cnn)
                     else -> null
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         TabLayoutMediator(binding.tabMain, binding.vpMain) { tab, position ->
             when (position) {
-                0 -> resources.getDrawable(R.drawable.logo_merdeka)
+                0 -> resources.getDrawable(R.drawable.logo_antara)
                 1 -> resources.getDrawable(R.drawable.logo_tempo)
                 2 -> resources.getDrawable(R.drawable.logo_cnn)
                 else -> null
